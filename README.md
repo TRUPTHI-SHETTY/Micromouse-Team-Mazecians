@@ -5,22 +5,26 @@ Maze Solving Robot Challenge:
 Code Overview:
 
 Initially flag=true for normal run, 
+
 If value stored is 50 at location 0 of EEPROM, execute final run code and set flag=false to avoid normal run.
 
 If key='2' is pressed on keypad module, write initially 0 and then 255 to all locations of EEPROM to avoid any other junk values.
 
 In case of Normal Run:
     1. Read values from front,left and right IR sensors
+
     2. Based on the values from sensors,assign wallType variable as shown below:
-        // 6  All walls
-        // 31 leftWall & rightWall
-        // 30  leftWall & frontWall
-        // 10 rightwall & front wall
-        // 3 leftWall
-        // 1 rightwall
-        // 0 frontwall
-        // 4  No walls
+        6 - All walls
+        31 - leftWall & rightWall
+        30 - leftWall & frontWall
+        10 - rightwall & front wall
+        3 - leftWall
+        1 - rightwall
+        0 - frontwall
+        4 - No walls
+
     3. To satisfy a game rule: "Avoid visiting start cell(0,0) again", check if it detects (xvar,yvar)=(0,1) or (1,0) cell again,new wallType will be assigned to it which helps to turn in such a way that it will not visit (0,0).
+
     4. Make turns based on below logic:
         // 30  leftWall & frontWall(1 Choice:Turn Right)
         // 10 rightwall & front wall(1 Choice:Turn Left)
@@ -64,7 +68,9 @@ In case of Normal Run:
        //directionValue:(Top:0,Right:1,Bottom:2,Left:3)
 
     6. Store new direction in directionStore Array for corresponding coordinates
+
     7. Update x,y coordinates based on the updated new direction
+
     8. Check if pattern of final 3 cells is detected and 
         if yes, 
             stop at 4th final cell and storeFinalDirection of all cells(Based on Current direction and Stored Direction-->Derive final direction of the cell. 
